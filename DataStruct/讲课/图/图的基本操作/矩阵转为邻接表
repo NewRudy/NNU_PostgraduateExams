@@ -1,0 +1,78 @@
+#define maxsize 100;
+
+//邻接表存储结构
+typedef struct node         //结点
+{
+    int adjvex;
+    int val;        //权值
+    struct node *next;
+}node;
+typedef struct   //头结点
+{
+    char vex;
+    int val;        //权值
+    node* next;
+}vexNode;
+typedef struct      //图
+{
+    int n,e;
+    vexNode adjlist[maxsize];
+}graph1;
+
+//矩阵存储机构
+typedef struct  //定义图结构
+{
+    int n,e;        //n是点，e是边
+    char arc[maxsize];
+    int edge[maxsize][maxsize];
+}gragh2;
+
+// 矩阵转邻接表
+graph1* function(graph2* g) {
+    if(!g){
+        return 0;
+    }
+    graph1* res = (graph1*)malloc(sizeof(graph1));
+    res->n = g->n;
+    res->e = g->e;
+    // 转换
+    for(int i=0;i<g->n;++i){
+        res->adjlist[i].vex = g->arc[i];        //转顶点
+        res->adjlist[i].next = 0;
+        for(int j=0;j<g->n;++j){        //转边
+            if(g->edge[i][j]){      //边存在的情况
+            node* temp = (node*)malloc(sizeof(node));     //新建一个结点
+            temp->adjvex = g->edge[i][j];
+            temp->next = 0;
+            temp->next = g.adjlist[i].next;          //头插法
+            g.adjlist[i].next = temp;
+            }
+        }
+    }
+    return res;
+}
+// 邻接表转矩阵
+graph2* function2(graph1* g) {
+    if(!g){
+        return 0;
+    }
+    graph2* res = (graph2)malloc(sizeof(graph2));
+    res->n = g->n;
+    res->e = g->e;
+    //初始化
+    for(int i=0;i<g->n;++i){
+        for(int j=0;j<g->n;++j){
+            res->edge[i][j] = 0;
+        }
+    }
+    //转换
+    for(int i=0;i<g->n;++i){
+        res->arc[i] = g->adjlist[i].vex;
+        node* temp = g->adjlist[i].next;
+        while(temp) {
+            res.edge[i][temp->adjvex] = temp->val;
+            temp = temp->next; 
+        }
+    }
+    return res;
+}

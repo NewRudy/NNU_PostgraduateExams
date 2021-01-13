@@ -1,0 +1,8 @@
+head->next==null;   //单链表带头结点为空的情况
+head->next==null;   //双链表带头结点为空的情况
+head->next==head;   //循环单链表带头结点为空的情况
+head->next==head;   //循环双链表带结点为空的情况
+head->prior==head;  //循环双链表带结点为空的情况
+head->next==head&&head->prior==head;    //循环双链表带结点为空的情况
+head->next==head||head->prior==head;    //循环双链表带结点为空的情况
+
